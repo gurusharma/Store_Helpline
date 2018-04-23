@@ -155,7 +155,6 @@ class Search_Page(tk.Frame):
         button1.grid(columnspan=2, sticky="w")
                 
         button3 = tk.Button(self, text="Request Help", command=self.call_for_help)
-                            #command=lambda: controller.show_frame(Call_Help))
         button3.grid(columnspan=2, sticky="w")
         
         global waitl
@@ -163,9 +162,10 @@ class Search_Page(tk.Frame):
         waitl.grid(columnspan=2, sticky="w")
         
 
-# Displays the PRoduct details and give the option to "Add to cart"
+# Displays the Product details and give the option to "Add to cart"
 class Product_Details(tk.Frame):
     
+    ## This is a function that creats a dialog box when ever a person calls for help
     def call_for_help(self):
       
         result = tkMessageBox.askquestion("Tk", "Are you sure about it?")
@@ -246,6 +246,7 @@ class Product_Details(tk.Frame):
         labelbr.config(text = brand)
         labelpr.config(text = price)
 
+    ## This is the constructor to build the GUI on the screen
     def __init__(self, parent, controller):
         tk.Frame.__init__(self, parent)
         
@@ -297,26 +298,6 @@ class Product_Details(tk.Frame):
         
         button3 = tk.Button(self, text="Request Help", command=self.call_for_help)
         button3.grid(columnspan=2, sticky="w")
-        
-        
-        
-class Call_Help(tk.Frame):
-
-    def __init__(self, parent, controller):
-        tk.Frame.__init__(self, parent)
-        label = tk.Label(self, text="StoreHelpLine", font=H1_FONT)
-        label.pack(pady=10,padx=10)
-
-        label2 = tk.Label(self, text="Call For Help", font=H2_FONT)
-        label2.pack(pady=10,padx=10)
-    
-        text = tk.Label(self, text="Help is on its way!!")
-        text.pack(pady=10,padx=10)
-        
-        button1 = tk.Button(self, text="OK",
-                            command=lambda: controller.show_frame(Search_Page))
-        button1.pack(pady=10,padx=10)
-
         
 
 class Wrong_Login(tk.Frame):
