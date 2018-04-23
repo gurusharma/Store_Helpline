@@ -1,14 +1,9 @@
-
-#! /usr/bin/env python3
-
 import RPi.GPIO as GPIO
 import serial
 import time
 
 ENABLE_PIN  = 14              # The BCM pin number corresponding to GPIO1
 
-#SERIAL_PORT = '/dev/ttyAMA0'  # The location of our serial port.  This may
-                              # vary depending on OS and RPi version.  The
 SERIAL_PORT = '/dev/ttyS0'   # RPi 3 has apparently used 'ttyAMA0' for
                               # Bluetooth and assigned 'ttyS0' to the GPIO
                               # serial port, so uncomment the appropriate
@@ -23,15 +18,8 @@ def validate_rfid(code):
     # A valid code will be 12 characters long with the first char being
     # a line feed and the last char being a carriage return.
     s = code.decode('ascii')
-
-    #if (len(s) == 12) and (s[0] == "\n") and (s[11] == "\r"):
-        # We matched a valid code.  Strip off the "\n" and "\r" and just
-       
-    #    return s[1:-1]
        
     if (len(s) == 12):
-      	# return True
-	# return the RFID code.
 	return s[1:11]
     
 def main():
@@ -63,19 +51,14 @@ def main():
        var = 1
         # Loop forever, or until CTRL-C is pressed.
        while var:
-	   # GPIO.setmode (GPIO.BOARD)
 	    GPIO.setup(6,GPIO.OUT)
 	    GPIO.output(6,GPIO.HIGH)
-	    #time.sleep(1)
-            #Read in 12 bytes from the serial port.
+	    #Read in 12 bytes from the serial port.
             print("Reading tag...")
             data = ser.read(12)
-            #print(data)
-            
-	    #Attempt to validate the data we just read.
+            #Attempt to validate the data we just read.
             code = validate_rfid(data)
-            #print(code)
-            
+         
 	    #If validate_rfid() returned a code, display it.
             if code:
                 print("Read RFID code: " + code);
